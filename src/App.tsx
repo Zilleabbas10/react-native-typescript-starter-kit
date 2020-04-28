@@ -1,113 +1,88 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import * as React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import {Fragment} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {StatusBar, View, Text, SafeAreaView} from 'react-native';
+import {AppNavigator} from './Navigation';
+import NetInfo from '@react-native-community/netinfo';
+import {If, Then, Else} from 'react-if';
 
+import {NavigationService} from './Services';
 import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  AppScreenLoader,
+  AppErrorDialog,
+  AppErrorBoundary,
+  AppNotification,
+} from './Components';
+import {APP_CONSTANTS} from './Constants';
+import {Colors} from './Themes';
+import {clearImagesCache} from './Components/Commons/CachedImageBackground';
 
-declare const global: {HermesInternal: null | {}};
+const {AppFlashMessage} = AppNotification;
+
+//@ts-ignore
+Text.defaultProps = {
+  //@ts-ignore
+  ...Text.defaultProps,
+  maxFontSizeMultiplier: 1.1,
+};
+
+const AppContainer = (props) => {
+  const {isAppError} = props;
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    NavigationService.setTopLevelNavigator(ref);
+  });
+
+  return (
+    <Fragment>
+      <AppErrorBoundary>
+        <StatusBar backgroundColor={Colors.rose} barStyle="default" />
+        <If condition={isAppError}>
+          <Then>
+            <NavigationContainer ref={ref}>
+              <AppNavigator />
+            </NavigationContainer>
+          </Then>
+          <Else>
+            <View style={{flex: 1}}>
+              <AppErrorDialog
+                isModalVisible={!isAppError}
+                errorMessage={APP_CONSTANTS.APP_ERROR_MESSAGE}
+                title="Technical Difficulties"
+                showButton={false}
+              />
+            </View>
+          </Else>
+        </If>
+      </AppErrorBoundary>
+    </Fragment>
+  );
+};
 
 const App = () => {
+  const [isConnected, toggleNetwork] = React.useState(false);
+
+  const handleConnectivityChange = async () => {
+    const checkConnectivity = await NetInfo.fetch();
+    const {isConnected} = checkConnectivity;
+    toggleNetwork(isConnected);
+    clearImagesCache();
+  };
+
+  React.useEffect(() => {
+    NetInfo.addEventListener((change) => handleConnectivityChange());
+  }, [isConnected]);
+
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.tsx</Text> to see change
-                this screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
+      <SafeAreaView style={{flex: 1}}>
+        <AppScreenLoader />
+        <AppContainer isAppError={isConnected} />
+        <AppFlashMessage />
       </SafeAreaView>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
 
 export default App;
