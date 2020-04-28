@@ -1,11 +1,13 @@
 import * as React from 'react';
 import {Fragment} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
+import {Provider} from 'react-redux';
 import {StatusBar, View, Text, SafeAreaView} from 'react-native';
 import {AppNavigator} from './Navigation';
 import NetInfo from '@react-native-community/netinfo';
 import {If, Then, Else} from 'react-if';
 
+import store from './Redux/store';
 import {NavigationService} from './Services';
 import {
   AppScreenLoader,
@@ -37,7 +39,6 @@ const AppContainer = (props) => {
   return (
     <Fragment>
       <AppErrorBoundary>
-        <StatusBar backgroundColor={Colors.rose} barStyle="default" />
         <If condition={isAppError}>
           <Then>
             <NavigationContainer ref={ref}>
@@ -75,13 +76,14 @@ const App = () => {
   }, [isConnected]);
 
   return (
-    <>
+    <Provider store={store}>
+      <StatusBar backgroundColor={Colors.darkPrimary} barStyle="default" />
       <SafeAreaView style={{flex: 1}}>
         <AppScreenLoader />
         <AppContainer isAppError={isConnected} />
         <AppFlashMessage />
       </SafeAreaView>
-    </>
+    </Provider>
   );
 };
 

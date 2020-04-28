@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {SafeAreaView, View, Image, KeyboardAvoidingView} from 'react-native';
+import {View, Image, KeyboardAvoidingView} from 'react-native';
+import {connect} from 'react-redux';
 
 import styles from './Styles';
 import {
@@ -13,6 +14,7 @@ import {isEmptyOrNil, useIsDeviceOrientationPortrait} from '../../Utils';
 import {APP_ROUTES} from '../../Navigation';
 import {Images, Colors, Metrics} from '../../Themes';
 import {NavigationService} from '../../Services';
+import {toggleAppScreenLoader} from '../../Actions';
 
 const getEmailError = (email: string) =>
   !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) &&
@@ -20,8 +22,17 @@ const getEmailError = (email: string) =>
     ? 'Invalid e-mail address'
     : '';
 
-const LoginScreen = (props: any) => {
+const LoginScreen = (props) => {
+  const {toggleAppLoader} = props;
   const [email, setEmail] = React.useState('');
+
+  const toggleLoader = () => {
+    toggleAppLoader(true);
+    setTimeout(() => {
+      toggleAppLoader(false);
+      NavigationService.navigate(APP_ROUTES.PASSWORD_SCREEN);
+    }, 3000);
+  };
 
   return (
     <View style={{flex: 1}}>
@@ -50,9 +61,7 @@ const LoginScreen = (props: any) => {
               //loading={loading}
               disabled={false}
               buttonLabel="Login"
-              onClickHandler={() =>
-                NavigationService.navigate(APP_ROUTES.PASSWORD_SCREEN)
-              }
+              onClickHandler={() => toggleLoader()}
             />
           </View>
 
@@ -75,4 +84,10 @@ const LoginScreen = (props: any) => {
   );
 };
 
-export default LoginScreen;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleAppLoader: (params) => dispatch(toggleAppScreenLoader(params)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(LoginScreen);

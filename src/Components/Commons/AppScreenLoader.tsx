@@ -35,12 +35,10 @@ const AppScreenLoader = (props: AppLoaderProps) => {
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     isLoading: state.appScreenLoader.isLoading
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.appScreenLoader.isLoading,
+  };
+};
 
-// export default connect(mapStateToProps)(AppScreenLoader);
-
-export default AppScreenLoader;
+export default connect(mapStateToProps)(AppScreenLoader);
