@@ -22,6 +22,7 @@
 		A7D1E451245789EF0039BD50 /* TTCommons-DemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7D1E450245789EE0039BD50 /* TTCommons-DemiBold.ttf */; };
 		A7D1E45324578A040039BD50 /* TTCommons-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7D1E45224578A040039BD50 /* TTCommons-Regular.ttf */; };
 		A7D1E45524578A120039BD50 /* TTCommons-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7D1E45424578A120039BD50 /* TTCommons-ThinItalic.ttf */; };
+		A7D785BA245885E000BA4EE8 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = A7D785B9245885E000BA4EE8 /* Fonts */; };
 		E00D824DE782026DA2780759 /* libPods-StarterKit-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C161EEFF2EBA988BCD31E0 /* libPods-StarterKit-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		A7D1E450245789EE0039BD50 /* TTCommons-DemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TTCommons-DemiBold.ttf"; path = "../assets/fonts/TTCommons-DemiBold.ttf"; sourceTree = "<group>"; };
 		A7D1E45224578A040039BD50 /* TTCommons-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TTCommons-Regular.ttf"; path = "../assets/fonts/TTCommons-Regular.ttf"; sourceTree = "<group>"; };
 		A7D1E45424578A120039BD50 /* TTCommons-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "TTCommons-ThinItalic.ttf"; path = "../assets/fonts/TTCommons-ThinItalic.ttf"; sourceTree = "<group>"; };
+		A7D785B9245885E000BA4EE8 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
 		BAFAD457D2181024ECB3EA16 /* Pods-StarterKit-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarterKit-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-StarterKit-tvOSTests/Pods-StarterKit-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		D7C161EEFF2EBA988BCD31E0 /* libPods-StarterKit-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StarterKit-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -165,6 +167,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				A7D785B9245885E000BA4EE8 /* Fonts */,
 				A7D1E45424578A120039BD50 /* TTCommons-ThinItalic.ttf */,
 				A7D1E45224578A040039BD50 /* TTCommons-Regular.ttf */,
 				A7D1E450245789EE0039BD50 /* TTCommons-DemiBold.ttf */,
@@ -192,6 +195,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BCA914D831F94618BDB8C8BB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		F8BA6FFE447583C340228B52 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,14 +216,6 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		BCA914D831F94618BDB8C8BB /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -360,6 +362,7 @@
 				A7D1E45524578A120039BD50 /* TTCommons-ThinItalic.ttf in Resources */,
 				A7D1E45324578A040039BD50 /* TTCommons-Regular.ttf in Resources */,
 				A7D1E451245789EF0039BD50 /* TTCommons-DemiBold.ttf in Resources */,
+				A7D785BA245885E000BA4EE8 /* Fonts in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
