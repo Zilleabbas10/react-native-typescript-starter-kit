@@ -5,7 +5,7 @@ import {propOr} from 'ramda';
 import {If, Switch, Case, Default} from 'react-if';
 
 import {Metrics, Fonts, Colors} from '../../Themes';
-import {IconWithBadge, AppText} from '.';
+import {IconWithBadge, AppText} from '../../Components';
 import {ChevronRightSvgIcon} from '../SvgIcons';
 import {isEmptyOrNil} from '../../Utils';
 
