@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
 
 import {LoginScreen, PasswordScreen} from '../Screens/Auth';
 import WebViewScreen from '../Screens/WebViewScreen';
@@ -15,6 +14,7 @@ const AuthStack = () => {
         headerTitle: '',
         headerStyle: {
           backgroundColor: 'transparent',
+          elevation: 0,
         },
       }}
       initialRouteName="LoginScreen">
